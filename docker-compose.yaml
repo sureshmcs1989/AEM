@@ -1,0 +1,25 @@
+version: '3'
+services:
+  author:
+    container_name: author-aem
+    build:
+      context: ./
+      dockerfile: author/Dockerfile
+    hostname: 'author'
+    ports:
+      - '4502:4502'
+    volumes:
+      - ./logs/author:/opt/aem/crx-quickstart/logs
+    depends_on:
+      - 'publisher'
+  publisher:
+    container_name: publisher-aem
+    build:
+      context: ./
+      dockerfile: publisher/Dockerfile
+    hostname: 'publisher'
+    ports:
+      - '4503:4503'
+    volumes:
+      - ./logs/publisher:/opt/aem/crx-quickstart/logs  
+
